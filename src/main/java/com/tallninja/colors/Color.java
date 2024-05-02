@@ -40,6 +40,10 @@ public class Color {
         return new Color(r, g, b, a);
     }
 
+    public float[] values() {
+        return new float[] {r, g, b};
+    }
+
     public float getR() {
         return r;
     }

@@ -8,6 +8,7 @@ package com.tallninja;
 import com.tallninja.colors.Color;
 import com.tallninja.colors.Colors;
 import com.tallninja.exceptions.*;
+import com.tallninja.time.EngineTime;
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
@@ -24,6 +25,8 @@ public abstract class BaseWindow {
     private final int width, height;
     private final Color backgroundColor;
     private long windowRef;
+
+    private long previousTime, currentTime;
 
     public BaseWindow(String title, int width, int height, Color backgroundColor) {
         this.title = title;
@@ -68,6 +71,11 @@ public abstract class BaseWindow {
             throw new GLFWCreateWindowException();
         }
 
+        EngineTime.time = 0;
+        EngineTime.deltaTime = 1/60f;
+        currentTime = System.currentTimeMillis();
+        previousTime = System.currentTimeMillis();
+
         // apply to this context instance
         glfwMakeContextCurrent(windowRef);
 
@@ -108,6 +116,11 @@ public abstract class BaseWindow {
         while (!glfwWindowShouldClose(windowRef)) {
             // poll input events
             glfwPollEvents();
+
+            currentTime = System.currentTimeMillis();
+            EngineTime.deltaTime = (currentTime - previousTime) / 1000f;
+            EngineTime.time += EngineTime.deltaTime;
+            previousTime = currentTime;
 
             // clear the framebuffer
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
