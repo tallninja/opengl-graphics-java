@@ -15,6 +15,7 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class DrawShape extends BaseWindow {
     private ShaderProgram shader;
+    private int vaoSquare, vaoTriangle;
 
     public DrawShape() {
         super("Draw Shape", 800, 600, Color.fromHex("#000000"));
@@ -30,24 +31,44 @@ public class DrawShape extends BaseWindow {
         glLineWidth(3);
 
         // Set up vertex array object
-        int vaoRef = glGenVertexArrays();
-        glBindVertexArray(vaoRef);
+        vaoSquare = glGenVertexArrays();
+        glBindVertexArray(vaoSquare);
 
-        float[] vertices = new float[] {
-                -0.5f, +0.5f, 0.0f, // top left
-                +0.5f, +0.5f, 0.0f, // top right
-                +0.5f, -0.5f, 0.0f, // bottom right
-                -0.5f, -0.5f, 0.0f  // bottom left
+        float[] squareVertices = new float[] {
+                -0.8f, +0.8f, 0.0f, // top left
+                -0.3f, +0.8f, 0.0f, // top right
+                -0.3f, +0.3f, 0.0f, // bottom right
+                -0.8f, +0.3f, 0.0f  // bottom left
         };
 
-        OpenGLAttribute attribute = new OpenGLAttribute("vec3", vertices);
-        attribute.bindVariable(shader, "aPos");
+        OpenGLAttribute squareAttribute = new OpenGLAttribute("vec3", squareVertices);
+        squareAttribute.bindVariable(shader, "aPos");
+
+        // Set up vertex array object
+        vaoTriangle = glGenVertexArrays();
+        glBindVertexArray(vaoTriangle);
+
+        float[] triangleVertices = new float[] {
+                +0.5f,  -0.3f, 0.0f, // top
+                +0.25f, -0.8f, 0.0f, // left
+                +0.75f, -0.8f, 0.0f, // right
+        };
+
+        OpenGLAttribute triangleAttribute = new OpenGLAttribute("vec3", triangleVertices);
+        triangleAttribute.bindVariable(shader, "aPos");
     }
 
     @Override
     public void update() {
         shader.bind();
+
+        // Draw square
+        glBindVertexArray(vaoSquare);
         glDrawArrays(GL_LINE_LOOP, 0, 4);
+
+        // Draw triangle
+        glBindVertexArray(vaoTriangle);
+        glDrawArrays(GL_LINE_LOOP, 0, 3);
     }
 
     @Override
