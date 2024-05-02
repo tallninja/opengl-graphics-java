@@ -22,7 +22,7 @@ public class OpenGLAttribute {
     private final String dataType;
 
     // Array containing the data
-    private final float[] data;
+    private float[] data;
 
     // Vertex buffer reference
     private final int bufferRef;
@@ -81,5 +81,13 @@ public class OpenGLAttribute {
 
     public void cleanup() {
 
+    }
+
+    public float[] getData() {
+        return data;
+    }
+
+    public void setData(float[] data) {
+        this.data = data;
     }
 }

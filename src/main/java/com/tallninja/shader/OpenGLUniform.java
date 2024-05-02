@@ -15,7 +15,7 @@ public class OpenGLUniform<T> {
 
     // int | bool | float | vec2 | vec3 | vec4
     private final String dataType;
-    private final T data;
+    private T data;
     private int[] genBufferResults = new int[1];
     private int uniformRef;
 
@@ -52,5 +52,13 @@ public class OpenGLUniform<T> {
 
     public int getUniformRef() {
         return uniformRef;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }
