@@ -20,10 +20,10 @@ import static org.lwjgl.system.MemoryUtil.NULL;
 
 public abstract class BaseWindow {
 
-    public final String title;
-    public final int width, height;
-    public final Color backgroundColor;
-    public long windowRef;
+    private final String title;
+    private final int width, height;
+    private final Color backgroundColor;
+    private long windowRef;
 
     public BaseWindow(String title, int width, int height, Color backgroundColor) {
         this.title = title;

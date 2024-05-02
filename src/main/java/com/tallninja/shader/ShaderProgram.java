@@ -37,13 +37,13 @@ public class ShaderProgram {
             throw new ShaderProgramCreationException();
         }
     }
-
+    
     public void createVertexShaderFromFile(String vertexShaderPath) {
         String vertexShaderSource = FileResourceUtils.readFile(vertexShaderPath);
         createVertexShader(vertexShaderSource);
         Logger.info("Successfully created vertex shader [{}]", vertexShaderPath);
     }
-
+    
     public void createFragmentShaderFromFile(String fragmentShaderPath) {
             String vertexShaderSource = FileResourceUtils.readFile(fragmentShaderPath);
             createFragmentShader(vertexShaderSource);
@@ -138,5 +138,8 @@ public class ShaderProgram {
             glDeleteProgram(programRef);
         }
     }
-    
+
+    public int getProgramRef() {
+        return programRef;
+    }
 }
