@@ -3,9 +3,8 @@
  * Email: ernestwambua2@gmail.com
  * Date: 5/2/24 : 9:31 AM
  */
-package com.tallninja.utils;
+package com.tallninja;
 
-import com.tallninja.BaseWindow;
 import com.tallninja.colors.Color;
 import com.tallninja.shader.OpenGLAttribute;
 import com.tallninja.shader.ShaderProgram;
