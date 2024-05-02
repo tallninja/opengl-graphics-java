@@ -41,6 +41,7 @@ public abstract class BaseWindow {
 
     public abstract void setup();
     public abstract void update();
+    public abstract void cleanup();
 
     // This method creates objects, initializes values and loads external files
     public void init() {
@@ -123,6 +124,9 @@ public abstract class BaseWindow {
         terminate();
     }
     public void terminate() {
+        // application specific cleanup function
+        cleanup();
+
         // stop window monitoring for user input
         glfwFreeCallbacks(windowRef);
         // close the window

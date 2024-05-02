@@ -22,6 +22,11 @@ public class TestWindow extends BaseWindow {
 
     }
 
+    @Override
+    public void cleanup() {
+
+    }
+
     public static void main(String[] args) {
         var testWindow = new TestWindow("Test Window", 800, 600);
         testWindow.run();

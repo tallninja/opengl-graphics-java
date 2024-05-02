@@ -25,14 +25,8 @@ public class ShaderProgram {
             throw new ShaderProgramCreationException();
         }
 
-        String vertexShaderSource = FileResourceUtils.readFile(vertexShaderPath);
-        String fragmentShaderSource = FileResourceUtils.readFile(fragmentShaderPath);
-
-        createVertexShader(vertexShaderSource);
-        Logger.info("Successfully Created vertex shader [{}]", vertexShaderPath);
-
-        createFragmentShader(fragmentShaderSource);
-        Logger.info("Successfully Created fragment shader [{}]", vertexShaderPath);
+        createVertexShaderFromFile(vertexShaderPath);
+        createFragmentShaderFromFile(fragmentShaderPath);
 
         linkShaders();
         Logger.info("Successfully Linked shaders");
@@ -42,6 +36,18 @@ public class ShaderProgram {
         if (programRef == GL_FALSE) {
             throw new ShaderProgramCreationException();
         }
+    }
+
+    public void createVertexShaderFromFile(String vertexShaderPath) {
+        String vertexShaderSource = FileResourceUtils.readFile(vertexShaderPath);
+        createVertexShader(vertexShaderSource);
+        Logger.info("Successfully created vertex shader [{}]", vertexShaderPath);
+    }
+
+    public void createFragmentShaderFromFile(String fragmentShaderPath) {
+            String vertexShaderSource = FileResourceUtils.readFile(fragmentShaderPath);
+            createFragmentShader(vertexShaderSource);
+            Logger.info("Successfully created fragment shader [{}]", fragmentShaderPath);
     }
 
     public void createVertexShader(String vertexShaderSource) {
@@ -132,8 +138,5 @@ public class ShaderProgram {
             glDeleteProgram(programRef);
         }
     }
-
-    public int getProgramRef() {
-        return programRef;
-    }
+    
 }
