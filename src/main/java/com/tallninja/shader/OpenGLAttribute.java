@@ -48,8 +48,8 @@ public class OpenGLAttribute {
     }
 
     // Bind this attribute to the shader program variable name
-    public void bindVariable(int programRef, String variableName) {
-        int variableRef = glGetAttribLocation(programRef, variableName);
+    public void bindVariable(ShaderProgram shader, String variableName) {
+        int variableRef = glGetAttribLocation(shader.getProgramRef(), variableName);
 
         if (variableRef == -1) return;
 

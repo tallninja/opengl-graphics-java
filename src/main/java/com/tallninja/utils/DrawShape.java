@@ -17,7 +17,7 @@ public class DrawShape extends BaseWindow {
     private ShaderProgram shader;
 
     public DrawShape() {
-        super("Draw Shape", 800, 600, Color.fromHex("#ff00ff"));
+        super("Draw Shape", 800, 600, Color.fromHex("#000000"));
     }
 
     @Override
@@ -41,7 +41,7 @@ public class DrawShape extends BaseWindow {
         };
 
         OpenGLAttribute attribute = new OpenGLAttribute("vec3", vertices);
-        attribute.bindVariable(shader.getProgramRef(), "aPos");
+        attribute.bindVariable(shader, "aPos");
     }
 
     @Override
